@@ -11,6 +11,9 @@ services:
     expose:
       - "18789"
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.openclaw.loadbalancer.server.port=18789"
     healthcheck:
       test: ["CMD", "node", "dist/index.js", "health", "--token", "${OPENCLAW_GATEWAY_TOKEN}"]
       interval: 30s
