@@ -17,10 +17,16 @@ services:
     #   - Ports Exposes: 18789
     # This ensures both HTTP and WebSocket requests route correctly.
     healthcheck:
-      test: ["CMD", "node", "dist/index.js", "health", "--token", "${OPENCLAW_GATEWAY_TOKEN}"]
-      interval: 30s
-      timeout: 10s
-      start_period: 60s
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:18789/__openclaw__/canvas/').then(r=>{if(!r.ok)throw 1;process.exit(0)}).catch(()=>process.exit(1))",
+        ]
+      interval: 15s
+      timeout: 5s
+      start_period: 30s
       retries: 3
     deploy:
       resources:
