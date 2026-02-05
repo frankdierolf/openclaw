@@ -182,7 +182,9 @@ himalaya message forward 42
 cat message.txt | himalaya template send
 ```
 
-### Prefill headers from CLI
+### Prefill editor from CLI
+
+Opens `$EDITOR` with headers and body prefilled:
 
 ```bash
 himalaya message write \
@@ -191,9 +193,11 @@ himalaya message write \
   "Message body here"
 ```
 
+For non-interactive sending (no editor), use `template send` with stdin instead.
+
 ## Tips
 
 - The editor opens with a template; fill in headers and body.
 - Save and exit the editor to send; exit without saving to cancel.
 - MML parts are compiled to proper MIME when sending.
-- Use `himalaya message export --full` to inspect the raw MIME structure of received emails.
+- Use `himalaya message export <ID> --full` to inspect the raw MIME structure of received emails.
