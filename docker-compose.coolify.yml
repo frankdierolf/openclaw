@@ -11,9 +11,11 @@ services:
     expose:
       - "18789"
     restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.services.openclaw.loadbalancer.server.port=18789"
+    # NOTE: No custom Traefik labels - let Coolify handle routing.
+    # In Coolify UI, set:
+    #   - Domain: https://openclaw.lay.haus
+    #   - Ports Exposes: 18789
+    # This ensures both HTTP and WebSocket requests route correctly.
     healthcheck:
       test: ["CMD", "node", "dist/index.js", "health", "--token", "${OPENCLAW_GATEWAY_TOKEN}"]
       interval: 30s
