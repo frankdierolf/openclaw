@@ -7,7 +7,7 @@ services:
       NODE_ENV: production
       TERM: xterm-256color
       OPENCLAW_GATEWAY_TOKEN: ${OPENCLAW_GATEWAY_TOKEN}
-      gateway.trustedProxies: ${gateway.trustedProxies:-["*"]}
+      gateway.trustedProxies: ${gateway.trustedProxies}
       TZ: ${TZ:-UTC}
     volumes:
       - openclaw-data:/home/node/.openclaw
