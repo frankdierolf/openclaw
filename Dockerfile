@@ -29,6 +29,10 @@ RUN pnpm build
 ENV OPENCLAW_PREFER_PNPM=1
 RUN pnpm ui:build
 
+# Create CLI wrapper in PATH for terminal access
+RUN printf '%s\n' '#!/usr/bin/env bash' 'exec node /app/openclaw.mjs "$@"' > /usr/local/bin/openclaw \
+  && chmod +x /usr/local/bin/openclaw
+
 ENV NODE_ENV=production
 
 # Allow non-root user to write temp files during runtime/tests.
